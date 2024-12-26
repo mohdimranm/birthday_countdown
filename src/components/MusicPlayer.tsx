@@ -20,7 +20,7 @@ const MusicPlayer: React.FC = () => {
     <div className="fixed bottom-4 right-4 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg">
       <audio
         ref={audioRef}
-        src="src/music/song.mp3"
+        src="/src/music/song.mp3"
         loop
       />
       <button
