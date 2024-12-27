@@ -11,7 +11,7 @@ import { calculateTimeLeft } from './utils/timeUtils';
 function App() {
   const [isComplete, setIsComplete] = useState(false);
   const [showContent, setShowContent] = useState(false);
-  // const targetTimeRef = useRef(new Date(Date.now() + 5000));
+  // const targetTimeRef = useRef(new Date(Date.now() + 500));
   const targetTimeRef = useRef(new Date('2024-12-31T00:00:00'));
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetTimeRef.current));
