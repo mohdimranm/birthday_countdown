@@ -9,10 +9,10 @@ import MusicPlayer from './components/MusicPlayer';
 import { calculateTimeLeft } from './utils/timeUtils';
 
 function App() {
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [isComplete, setIsComplete] = useState(false);
   const [showContent, setShowContent] = useState(false);
-  const targetTimeRef = useRef(new Date('2024-12-31T00:00:00'));
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetTimeRef.current));
+  const targetTimeRef = useRef(new Date('2024-12-30T00:00:00'));
 
   useEffect(() => {
     const timer = setInterval(() => {

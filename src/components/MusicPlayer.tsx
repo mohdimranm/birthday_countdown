@@ -17,23 +17,30 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg">
+    <div className="fixed bottom-8 right-8 animate-bounce-slow">
+      <div className="relative">
+        {!isPlaying && (
+          <div className="absolute -top-16 right-0 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+            <p className="text-sm text-pink-600 whitespace-nowrap">Click to play music! 🎵</p>
+          </div>
+        )}
+        <button
+          onClick={togglePlay}
+          className="flex items-center space-x-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+        >
+          <Music className="w-6 h-6" />
+          {isPlaying ? (
+            <Pause className="w-6 h-6" />
+          ) : (
+            <Play className="w-6 h-6" />
+          )}
+        </button>
+      </div>
       <audio
         ref={audioRef}
         src="/assets/song.mp3"
         loop
       />
-      <button
-        onClick={togglePlay}
-        className="flex items-center space-x-2 text-pink-500 hover:text-pink-600 transition-colors"
-      >
-        <Music className="w-5 h-5" />
-        {isPlaying ? (
-          <Pause className="w-5 h-5" />
-        ) : (
-          <Play className="w-5 h-5" />
-        )}
-      </button>
     </div>
   );
 };

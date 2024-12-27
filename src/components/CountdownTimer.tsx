@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { TimeLeft } from '../types';
 import { Sparkles, Stars, Heart, Gift, Music, Cake } from 'lucide-react';
 import TimeUnit from './TimeUnit';
 import BirthdayMessage from './BirthdayMessage';
+import Celebration from './Celebration';
 
 interface CountdownTimerProps {
   timeLeft: TimeLeft;
 }
 
 const CountdownTimer: React.FC<CountdownTimerProps> = ({ timeLeft }) => {
+  const [showCelebration, setShowCelebration] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const handleCelebration = useCallback(() => {
+    setShowCelebration(true);
+    setTimeout(() => setShowCelebration(false), 4000);
+  }, []);
+
   const timeUnits = [
     { unit: 'days', icon: Cake, color: 'from-pink-500 to-red-500' },
     { unit: 'hours', icon: Gift, color: 'from-purple-500 to-indigo-500' },
@@ -17,10 +26,10 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ timeLeft }) => {
   ];
 
   return (
-    <div className="relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-pink-200/30 via-purple-200/30 to-pink-200/30 blur-3xl transform -skew-y-6 animate-pulse" />
+    <div ref={containerRef} className="relative min-h-[600px] overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm p-8">
+      {showCelebration && <Celebration isActive={showCelebration} duration={3000} />}
       
-      <div className="relative">
+      <div className="relative z-10">
         <BirthdayMessage />
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
@@ -38,13 +47,16 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ timeLeft }) => {
         </div>
 
         <div className="mt-16 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform">
-            <Music className="w-5 h-5 text-pink-500 animate-bounce" />
-            <span className="text-lg text-gray-700 font-medium">
+          <button
+            onClick={handleCelebration}
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 hover:shadow-xl"
+          >
+            <Music className="w-5 h-5 animate-bounce" />
+            <span className="text-lg font-medium">
               Get ready for the celebration!
             </span>
-            <Sparkles className="w-5 h-5 text-purple-500 animate-spin-slow" />
-          </div>
+            <Sparkles className="w-5 h-5 animate-spin-slow" />
+          </button>
         </div>
       </div>
     </div>

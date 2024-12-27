@@ -38,9 +38,9 @@
   50% { transform: translateY(-35px) rotate(15deg); }
 }
 
-@keyframes glow {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.2); }
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .animate-float-0 { animation: float-0 3s ease-in-out infinite; }
@@ -48,7 +48,7 @@
 .animate-float-2 { animation: float-2 5s ease-in-out infinite; }
 .animate-float-3 { animation: float-3 3.5s ease-in-out infinite; }
 .animate-float-4 { animation: float-4 4.5s ease-in-out infinite; }
-.animate-glow { animation: glow 2s ease-in-out infinite; }
+.animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
 
 @keyframes tiltIn {
   from {
